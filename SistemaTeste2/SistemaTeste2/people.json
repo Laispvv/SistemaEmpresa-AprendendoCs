@@ -1,0 +1,62 @@
+[
+  {
+    "Name": "Michael Scott",
+    "Role": "Manager",
+    "Status": "Active",
+    "Dia": "03",
+    "Mes": "10",
+    "Ano": "2009",
+    "Password": "123",
+    "Photo": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheofficeanalytics.files.wordpress.com%2F2017%2F11%2Fdwight.jpeg%3Fw%3D1200&f=1&nofb=1"
+  },
+  {
+    "Name": "Dwight Schrute",
+    "Role": "Sales Representative",
+    "Status": "Active",
+    "Dia": "03",
+    "Mes": "10",
+    "Ano": "2009",
+    "Password": "123",
+    "Photo": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheofficeanalytics.files.wordpress.com%2F2017%2F11%2Fdwight.jpeg%3Fw%3D1200&f=1&nofb=1"
+  },
+  {
+    "Name": "James Halpert",
+    "Role": "Sales Representative",
+    "Status": "Inactive",
+    "Dia": "03",
+    "Mes": "10",
+    "Ano": "2009",
+    "Password": "123",
+    "Photo": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F2953301296%2F3c9f22df7b1eec05cc646d461158828b_400x400.jpeg&f=1&nofb=1"
+  },
+  {
+    "Name": "Pamela Beesly",
+    "Role": "Receptionist",
+    "Status": "Inactive",
+    "Dia": "03",
+    "Mes": "10",
+    "Ano": "2009",
+    "Password": "123",
+    "Photo": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg.nbc.com%2Fsites%2Fnbcunbc%2Ffiles%2Fmetaverse_assets%2F1%2F0%2F6%2F3%2F4%2F0%2Fpam-500x500.jpg&f=1&nofb=1"
+  },
+  {
+    "Name": "Kevin Malone",
+    "Role": "Accountant",
+    "Status": "Suspended",
+    "Dia": "03",
+    "Mes": "10",
+    "Ano": "2009",
+    "Password": "123",
+    "Photo": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F66.media.tumblr.com%2Fcd4842fe273d1d987ca238a279319a1a%2Ftumblr_ppmc8cjraH1seiesj_500.jpg&f=1&nofb=1"
+  },
+  {
+    "Name": "Angela Martin",
+    "Role": "Senior Accountant",
+    "Status": "Active",
+    "Dia": "03",
+    "Mes": "10",
+    "Ano": "2009",
+    "Password": "123",
+    "Photo": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fa1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com%2Fimages%2Fcharacters%2Fp-the-office-angela-kinsey.jpg&f=1&nofb=1"
+  }
+]
