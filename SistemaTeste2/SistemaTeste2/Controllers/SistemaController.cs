@@ -65,5 +65,11 @@ namespace SistemaTeste2.Controllers
             return Json(new {ok=true, newurl = Url.Action("Dashboard") });
             //quando tiver acabado de adicionar vai chamar a view da dashboard!
         }
+
+        [HttpPost]
+        public void DeletePessoa([FromBody]int id)
+        {
+            personRepository.DeletePessoa(id);
+        }
     }
 }

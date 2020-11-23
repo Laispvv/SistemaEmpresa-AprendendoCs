@@ -16,6 +16,7 @@ namespace SistemaTeste2.Repositories
         void UpdatePessoas(Person person);
         void SavePessoas(List<Pessoa> pessoas);
         void AddPessoa(Person person);
+        void DeletePessoa(int id);
     }
 
     public class PersonRepository : BaseRepository<Person>, IPersonRepository
@@ -28,6 +29,14 @@ namespace SistemaTeste2.Repositories
         public void AddPessoa(Person p)
         {
             contexto.People.Add(new Person(p.Name, p.Role, p.Status, p.Password, p.Dia, p.Mes, p.Ano, p.Photo));
+            contexto.SaveChanges();
+        }
+
+        public void DeletePessoa(int id)
+        {
+            var pessoas = GetPeople();
+            //pega a pessoa cujo id é igual ao passado e remove ela
+            contexto.Remove(pessoas.Where(p => p.Id == id).SingleOrDefault());
             contexto.SaveChanges();
         }
 

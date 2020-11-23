@@ -1,8 +1,15 @@
 ﻿var deleteUser = function (botao) {
     console.log(botao);
     console.log($(botao).parent().parent());
-
+    var id = $(botao).attr("id");
     $(botao).parent().parent().remove();
+
+    $.ajax({
+        url: '/sistema/deletepessoa',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(id)
+    });
 }
 
 var onCancelButtonClick = function (botao) {
@@ -10,26 +17,6 @@ var onCancelButtonClick = function (botao) {
         deleteUser(botao);
     }
 }
-
-//var onCogButtonClick = function (botao) {
-//    console.log(botao);
-//    console.log(selectUser(botao.id));
-//}
-
-
-var onAddNewUserClick = function () {
-    //@{ Response.Redirect("~/Sistema/Form"); }
-    // verifyAutentication para poder adicionar novos usuários
-    //if (verifyAutentication()) {
-    //    window.location.href = '/form/form.html';
-    //}
-}
-
-var exportToExcel = document.getElementById("exportToExcel");
-
-exportToExcel.addEventListener("click", function () {
-    console.log("export to excel");
-});
 
 //ajeitando parte de paginação
 //pinta o botão da página atual de azul
