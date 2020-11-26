@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SistemaTeste2.Models;
 using SistemaTeste2.Repositories;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SistemaTeste2.Controllers
 {
@@ -29,7 +27,7 @@ namespace SistemaTeste2.Controllers
             return View();
         }
 
-        //[HttpPost] -> cuidar disso depois, para só ter acesso dps de logar pelo login
+        [HttpGet]
         public IActionResult Dashboard()
         {
             return View(personRepository.GetPeople());
@@ -70,6 +68,17 @@ namespace SistemaTeste2.Controllers
         public void DeletePessoa([FromBody]int id)
         {
             personRepository.DeletePessoa(id);
+        }
+
+        [HttpPost]
+        public IActionResult VerificarAutenticacao([FromBody]Login login)
+        {
+            var pessoas = personRepository.GetPeople();
+            var isLogged = pessoas.Where(p => p.Name == login.User && p.Password == login.Password).SingleOrDefault();
+
+            if (isLogged != null) return Json(new { ok = true, newurl = Url.Action("Dashboard") });
+
+            return Json(new { ok = false, newurl = Url.Action("Login") });
         }
     }
 }

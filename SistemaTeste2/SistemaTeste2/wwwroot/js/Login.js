@@ -5,47 +5,52 @@ var buttonEye = document.getElementById("buttonEye");
 
 // Função do botão de login -> verificar validade da entrada
 onLoginClick = function () {
-    debugger
     console.log("olá");
     var email = document.getElementById("emailInput").value;
     var senha = document.getElementById("passwordInput").value;
     var msg = document.getElementById("acessDenied");
+    var data = {
+        User: email,
+        Password: senha
+    };
 
-    var flag = false;
-    const userList = JSON.parse(localStorage.getItem('userList'));
+    $.ajax({
+        type: "POST",
+        url: '/sistema/VerificarAutenticacao',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (info) {
+            if (info.ok) {
+                msg.textContent = "";
+                if (document.getElementById("rememberSession").checked) {
+                    localStorage.setItem("autentication", true);
+                }
+                else {
+                    sessionStorage.setItem("autentication", true);
+                }
+                //window.location = info.newurl;
+            }
 
-    //se apagar a lista, então ele faz o login pra gerar a lista, porem define como falsa a autenticação
-    if (userList == null) {
-        // localStorage.setItem("autentication", false);
-        // window.location.href = '/dashboard/dashboard.html';
-        msg.textContent = "Usuário ou senha incorretos";
-
-    }
-    else {
-        for (var i = 0; i < userList.length; i++) {
-            //se achar um usuário e senha que batem, então quebra e valida
-            if (userList[i].name == email && userList[i].password == senha) {
-                flag = true;
-                break;
+            else {
+                msg.textContent = "Usuário ou senha incorretos";
             }
         }
-    }
-    if (flag) {
-        msg.textContent = "";
-        if (document.getElementById("rememberSession").checked) {
-            localStorage.setItem("autentication", true);
-        }
-        else {
-            sessionStorage.setItem("autentication", true);
-        }
+    });
 
-        window.location.href = '/dashboard/dashboard.html';
-    }
-    else {
-        msg.textContent = "Usuário ou senha incorretos";
-    }
-};
+
+    if (sessionStorage.getItem("autentication")) {
+        $.ajax({
+            type: "POST",
+            url: '/sistema/Dashboard',
+            contentType: 'application/json',
+            success: function (algo) {
+                console.log("oaldsjf");
+                window.location = algo;
+            }
+        });
                                 
+    }
+}
 
 // Faz o botão funcionar login funcionar
 //loginB.addEventListener("click", onLoginClick);
