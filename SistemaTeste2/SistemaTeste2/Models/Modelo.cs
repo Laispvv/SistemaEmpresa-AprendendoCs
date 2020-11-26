@@ -40,12 +40,15 @@ namespace SistemaTeste2.Models
         public string Password { get; set; }
         [Required]
         [DataMember]
+        public string Email { get; set; }
+        [Required]
+        [DataMember]
         public string Photo { get; set; }
         //[Required]
         [DataMember]
         public Sistema Sistema { get; private set; }
 
-        public Person(string name, string role, string status, string password, string dia, string mes, string ano, string photo)
+        public Person(string name, string role, string status, string password, string email, string dia, string mes, string ano, string photo)
         {
             Name = name;
             Role = role;
@@ -54,11 +57,12 @@ namespace SistemaTeste2.Models
             Dia = dia;
             Mes = mes;
             Ano = ano;
+            Email = email;
             Photo = photo;
         }
         public override string ToString()
         {
-            return $"{Name},{Role},{Status},{Dia},{Mes},{Ano}";
+            return $"{Name},{Email},{Role},{Status},{Dia},{Mes},{Ano}";
         }
         public string StatusIconObj()
         {
@@ -79,6 +83,7 @@ namespace SistemaTeste2.Models
             //quais valores não são nulos e devem ser de fato atualizados
             if (person.Name != "") person1.Name = person.Name;
             if (person.Password != "") person1.Password = person.Password;
+            if (person.Email != "") person1.Email = person.Email;
             if (person.Photo != "" && person.Photo != null) person1.Photo = person.Photo;
             if (person.Status != "0") person1.Status = person.Status;
             if (person.Role != "") person1.Role = person.Role;
