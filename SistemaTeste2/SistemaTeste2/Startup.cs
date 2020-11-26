@@ -33,8 +33,7 @@ namespace SistemaTeste2
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc();
             //define qual connection string vai pegar
             string connectionString = Configuration.GetConnectionString("Default");
             //passa  aconnection string pega pra o banco de dados
@@ -60,6 +59,7 @@ namespace SistemaTeste2
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication(); //adiciona o ASP.NET Core Identity ao fluxo de trabalho
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>
@@ -71,6 +71,7 @@ namespace SistemaTeste2
 
             //configuração que garante que a database será criada na inicialização!
             serviceProvider.GetService<IDataService>().InicializaDb();
+
         }
     }
 }
