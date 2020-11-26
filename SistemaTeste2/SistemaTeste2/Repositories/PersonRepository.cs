@@ -1,9 +1,7 @@
 ﻿using CasaDoCodigo.Repositories;
 using SistemaTeste2.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using static SistemaTeste2.Repositories.PersonRepository;
 
 namespace SistemaTeste2.Repositories

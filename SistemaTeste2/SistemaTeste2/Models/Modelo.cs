@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
 
 namespace SistemaTeste2.Models
 {
@@ -96,14 +93,11 @@ namespace SistemaTeste2.Models
         public Login()
         {
         }
-
-        public bool IsLogged { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
 
-        public Login(bool isLogged, string user, string password)
+        public Login(string user, string password)
         {
-            IsLogged = isLogged;
             User = user;
             Password = password;
         }
