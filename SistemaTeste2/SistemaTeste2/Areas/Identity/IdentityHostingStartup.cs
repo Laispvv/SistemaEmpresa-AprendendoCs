@@ -20,7 +20,12 @@ namespace SistemaTeste2.Areas.Identity
                     options.UseSqlite(
                         context.Configuration.GetConnectionString("AppIdentityContextConnection")));
 
-                services.AddDefaultIdentity<AppIdentityUser>()
+                services.AddDefaultIdentity<AppIdentityUser>(options => 
+                {
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireLowercase = false;
+                })
                     .AddEntityFrameworkStores<AppIdentityContext>();
             });
         }
