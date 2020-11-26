@@ -28,6 +28,7 @@ namespace SistemaTeste2.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Dashboard()
         {
             return View(personRepository.GetPeople());

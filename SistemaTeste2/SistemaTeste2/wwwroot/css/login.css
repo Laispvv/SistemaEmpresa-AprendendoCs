@@ -1,7 +1,7 @@
 body{
     background-color: #22bee6;
-    /* background-image: url("https://images.pexels.com/photos/112141/pexels-photo-112141.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
-    background-size: default;
+/*     background-image: url("https://images.pexels.com/photos/112141/pexels-photo-112141.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
+    background-size: auto;
     background-repeat: no-repeat;
     overflow-y: hidden;
     font-family: 'PT Sans', sans-serif;
@@ -69,7 +69,7 @@ body{
     margin-top: 30px;
 }
 
-input[type=email], input[type=password],  input[type=text]{
+input[type=email], input[type=password],  input[type=text], .textType{
     /* características da fonte */
     font-family: 'PT Sans', sans-serif;
     font-size: 20px;

@@ -27,7 +27,12 @@ O identity é um framework que facilita a autenticação e login de usuários no
 - caso já esteja criado, deve clicar no projeto com o botão direito -> add -> new Scaffold Item
   - ao adicionar um Scaffold, devemos colocar ele na view `_Layout.cshtml`.
 
+### SQlite
 
+O Identity usa o SQlite, para isso, é preciso instalar ele no projeto com o NuGet, e então fazer uma migration do banco para a versão que utiliza o SQlite, da seguinte forma:
+  - Adicionamos uma Migration especificando como context o do Identity: `Add-Migration "Identity"  -Context AppIdentityContext`.
+  - Aplicamos a migração para criar o banco `Update-Database -Context AppIdentityContext`.
+  
 ### Configurando
 
 ##### Para alterar o idioma e conteúdo e das mensagens e dos erros:
