@@ -26,7 +26,7 @@ namespace SistemaTeste2.Repositories
 
         public void AddPessoa(Person p)
         {
-            contexto.People.Add(new Person(p.Name, p.Role, p.Status, p.Password, p.Dia, p.Mes, p.Ano, p.Photo));
+            contexto.People.Add(new Person(p.Name, p.Role, p.Status, p.Password, p.Email, p.Dia, p.Mes, p.Ano, p.Photo));
             contexto.SaveChanges();
         }
 
@@ -58,7 +58,7 @@ namespace SistemaTeste2.Repositories
                 //{
 
                 //}
-                contexto.People.Add(new Person(p.Name, p.Role, p.Status, p.Password, p.Dia, p.Mes, p.Ano, p.Photo));
+                contexto.People.Add(new Person(p.Name, p.Role, p.Status, p.Password, p.Email, p.Dia, p.Mes, p.Ano, p.Photo));
                 //contexto.Set<Person>().Add(new Person(p.Name, p.Role, p.Status, p.Password, p.DateCreated, p.Photo));
             }
             contexto.SaveChanges();
@@ -88,6 +88,7 @@ namespace SistemaTeste2.Repositories
             public string Mes { get; set; }
             public string Ano { get; set; }
             public string Password { get; set; }
+            public string Email { get; set; }
             public string Photo { get; set; }
         }
     }
