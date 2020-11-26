@@ -25,6 +25,7 @@ namespace SistemaTeste2.Areas.Identity
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireLowercase = false;
+                   
                 })
                     .AddEntityFrameworkStores<AppIdentityContext>();
             });

@@ -7,7 +7,7 @@
   <ItemGroup>
     <Content Remove="Views\Sistema\Dashboard.cshtml" />
     <Content Remove="Views\Sistema\form.cshtml" />
-    <Content Remove="Views\Sistema\login.cshtml" />
+    <Content Remove="Views\Sistema\Login.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +38,13 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Identity\Pages\Account\Login.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

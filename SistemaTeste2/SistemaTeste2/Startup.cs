@@ -66,7 +66,7 @@ namespace SistemaTeste2
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Sistema}/{action=Login}/{id?}");
+                    template: "{controller=Sistema}/{action=Dashboard}/{id?}");
             });
 
             //configuração que garante que a database será criada na inicialização!
