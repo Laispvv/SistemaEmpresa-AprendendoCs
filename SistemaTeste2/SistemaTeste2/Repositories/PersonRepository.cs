@@ -69,7 +69,10 @@ namespace SistemaTeste2.Repositories
             //acha a pessoa cujo id é igual ao que estamos passando
             var personDB = dbSet.Where(p => p.Id == person.Id)
                                 .SingleOrDefault(); //pega o primeiro valor ou deixa null
-            var pessoasAntesAtualizacao = personDB;
+            var pessoasAntesAtualizacao = new Person();
+            pessoasAntesAtualizacao.Email = personDB.Email;
+            pessoasAntesAtualizacao.Password = personDB.Password;
+
             if(personDB != null)
             {
                 //passa a pessoa pra atualizar

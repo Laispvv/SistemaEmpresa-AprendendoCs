@@ -418,6 +418,7 @@
         }
 
         function saveChanges() {
+            debugger;
             //pega se é update ou add
             var url = window.location.search;
             const urlParams = new URLSearchParams(url);
@@ -436,6 +437,7 @@
                     data: JSON.stringify(data),
                     success: function (returndata) {
                         //pega a url do retorno da função no controller
+                        console.log(returndata.newurl);
                         window.location = returndata.newurl;
                     }
                 });

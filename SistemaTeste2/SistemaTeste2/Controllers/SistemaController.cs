@@ -64,21 +64,25 @@ namespace SistemaTeste2.Controllers
 
             //acha o user com determinado email
             var user = await userManager.FindByEmailAsync(pessoa.Email);
+            if(user == )
                
 
             if(user != null)
             {
                 //verifica se ouve a atualização em um dos campos
-                if (person.Email != "") user.Email = pessoa.Email;
-                if (person.Password != "") user.Password = pessoa.Password;
+                if (person.Email != "")
+                {
+                    user.Email = person.Email;
+                    user.UserName = person.Email;
+                }
+                if (person.Password != "") user.Password = person.Password;
+                await userManager.UpdateAsync(user);
             }
             //atualiza o SQLite
-            await userManager.UpdateAsync(user);
 
             //retorna uma url para redirecionar quando o ajax chama
             //quando tiver acabado de adicionar vai chamar a view da dashboard!
-            RedirectToAction("Dashboard");
-            return Json(new {ok=true, newurl = Url.Action("Dashboard") });
+            return Json(new { ok = true, newurl = Url.Action("Dashboard") });
         }
 
         [HttpPost]
