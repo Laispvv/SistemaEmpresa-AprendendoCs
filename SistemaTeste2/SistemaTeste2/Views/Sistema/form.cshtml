@@ -383,7 +383,7 @@
             var month = document.getElementById("month").value;
             var year = document.getElementById("year").value;
             var password = document.getElementById("countryInput").value;
-
+            var email = document.getElementById("emailInput").value;
 
             if (status == '1') {
                 status = "Active";
@@ -407,6 +407,7 @@
                 Name: name,
                 Role: role,
                 Status: status,
+                Email: email,
                 Dia: day,
                 Mes: month,
                 Ano: year,
@@ -429,7 +430,7 @@
 
                 //chamada do método update
                 $.ajax({
-                    url: '/sistema/updatepessoas',
+                    url: '/sistema/UpdatePessoasAsync',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(data),
@@ -448,6 +449,7 @@
                 if (data.Name &&
                     data.Role &&
                     data.Password &&
+                    data.Email &&
                     data.Status != 0 &&
                     data.Dia != 0 &&
                     data.Mes != 0 &&
@@ -456,7 +458,7 @@
                 ){
                     //chamada ajax para mandar o post de add pessoa
                     $.ajax({
-                        url: '/sistema/addpessoa',
+                        url: '/sistema/AddPessoaAsync',
                         type: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify(data),

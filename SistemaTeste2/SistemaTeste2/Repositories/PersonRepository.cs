@@ -11,7 +11,7 @@ namespace SistemaTeste2.Repositories
         //void SavePessoas(List<PersonRepository.Pessoa> pessoas);
         IList<Person> GetPeople();
         bool ExistsPeoples();
-        void UpdatePessoas(Person person);
+        Person UpdatePessoas(Person person);
         void SavePessoas(List<Pessoa> pessoas);
         void AddPessoa(Person person);
         void DeletePessoa(int id);
@@ -64,11 +64,12 @@ namespace SistemaTeste2.Repositories
             contexto.SaveChanges();
         }
 
-        public void UpdatePessoas(Person person)
+        public Person UpdatePessoas(Person person)
         {
             //acha a pessoa cujo id é igual ao que estamos passando
             var personDB = dbSet.Where(p => p.Id == person.Id)
                                 .SingleOrDefault(); //pega o primeiro valor ou deixa null
+            var pessoasAntesAtualizacao = personDB;
             if(personDB != null)
             {
                 //passa a pessoa pra atualizar
@@ -76,6 +77,7 @@ namespace SistemaTeste2.Repositories
 
                 contexto.SaveChanges();
             }
+            return pessoasAntesAtualizacao;
         }
 
         public class Pessoa

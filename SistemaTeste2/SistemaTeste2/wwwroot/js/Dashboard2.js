@@ -5,7 +5,7 @@
     $(botao).parent().parent().remove();
 
     $.ajax({
-        url: '/sistema/deletepessoa',
+        url: '/sistema/DeletePessoaAsync',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(id)

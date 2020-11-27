@@ -1,20 +1,27 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SistemaTeste2.Areas.Identity;
+using SistemaTeste2.Areas.Identity.Data;
 using SistemaTeste2.Models;
 using SistemaTeste2.Repositories;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SistemaTeste2.Controllers
 {
     public class SistemaController : Controller
     {
         private readonly IPersonRepository personRepository;
+        private readonly UserManager<AppIdentityUser> userManager;
 
-        public SistemaController(IPersonRepository personRepository)
+        public SistemaController(IPersonRepository personRepository,
+            UserManager<AppIdentityUser> userManager)
         {
             this.personRepository = personRepository;
+            this.userManager = userManager;
         }
 
         public IActionResult Login()
@@ -47,28 +54,57 @@ namespace SistemaTeste2.Controllers
             }
             return RedirectToAction("Dashboard");
         }
+
         [HttpPost]
-        public IActionResult UpdatePessoas([FromBody]Person person)
+        public async Task<IActionResult> UpdatePessoasAsync([FromBody]Person person)
         {
-            personRepository.UpdatePessoas(person);
+            var pessoas = personRepository.GetPeople();
+            //pessoa = pessoa sem atualização de dados
+            var pessoa = personRepository.UpdatePessoas(person);
+
+            //acha o user com determinado email
+            var user = await userManager.FindByEmailAsync(pessoa.Email);
+               
+
+            if(user != null)
+            {
+                //verifica se ouve a atualização em um dos campos
+                if (person.Email != "") user.Email = pessoa.Email;
+                if (person.Password != "") user.Password = pessoa.Password;
+            }
+            //atualiza o SQLite
+            await userManager.UpdateAsync(user);
+
             //retorna uma url para redirecionar quando o ajax chama
             //quando tiver acabado de adicionar vai chamar a view da dashboard!
+            RedirectToAction("Dashboard");
             return Json(new {ok=true, newurl = Url.Action("Dashboard") });
-        
-            //return RedirectToAction("Dashboard");
-        }
-        [HttpPost]
-        public IActionResult AddPessoa([FromBody]Person person)
-        {
-            personRepository.AddPessoa(person);
-            return Json(new {ok=true, newurl = Url.Action("Dashboard") });
-            //quando tiver acabado de adicionar vai chamar a view da dashboard!
         }
 
         [HttpPost]
-        public void DeletePessoa([FromBody]int id)
+        public async Task<IActionResult> AddPessoaAsync([FromBody]Person person)
         {
+            personRepository.AddPessoa(person);
+            
+            var appUser = new AppIdentityUser(person.Email);
+            await userManager.CreateAsync(appUser, person.Password);
+            //quando tiver acabado de adicionar vai chamar a view da dashboard!
+            return Json(new {ok=true, newurl = Url.Action("Dashboard") });
+        }
+
+        [HttpPost]
+        public async Task DeletePessoaAsync([FromBody]int id)
+        {
+            var pessoas = personRepository.GetPeople();
             personRepository.DeletePessoa(id);
+            var user = await userManager.FindByNameAsync(pessoas
+                .Where(p => p.Id == id)
+                .SingleOrDefault()
+                .Email);
+            if (user != null)
+            {
+                await userManager.DeleteAsync(user);
+            }
         }
 
         [HttpPost]
