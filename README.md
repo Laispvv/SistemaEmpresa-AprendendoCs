@@ -41,16 +41,24 @@ O Identity usa o SQlite, para isso, é preciso instalar ele no projeto com o NuG
 
 - Altera o arquivo `IdentityHostingStartup.cs` para mudar as mensagens de erro:
   - Adiciona em services uma classe descritora de erros `.AddErrorDescriber<IdentityErrorDescriberPtBr>()` e cria essa classe `IdentityErrorDescriberPtBr` herdando `IdentityErrorDescriber` dando override em todos os métodos. Ex:
-  ```cs
-    public override IdentityError PasswordRequiresLower()
-    {
-      return new IdentityError
+    ```cs
+      public override IdentityError PasswordRequiresLower()
       {
-        Code = nameof(PasswordRequiresLower),
-        Description = "A senha deve ter pelo menos um caracter minúsculo."
-      };
-    }
-  ```
+        return new IdentityError
+        {
+          Code = nameof(PasswordRequiresLower),
+          Description = "A senha deve ter pelo menos um caracter minúsculo."
+        };
+      }
+    ```
   - Para eliminar determinadas características da senha, no `AddDefaultIdentity()` deve-se mudar as options, colocando `AddDefaultIdentity(options =>{})` e definindo como false os atributos `options.Password.`
 
+##### Para alterar as características do banco SQLite:
 
+- Deve adicionar propriedades à classe existente `AppIdentityUser` e depois criar uma migração e aplicar ela para atualizar a tabela de usuário. Ex:
+  ```cs
+  public class AppIdentityUser : IdentityUser
+  {
+      public string PropriedadeCustom { get; set; }
+  }
+  ```

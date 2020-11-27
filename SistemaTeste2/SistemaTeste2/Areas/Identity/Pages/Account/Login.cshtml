@@ -69,7 +69,8 @@
                 <a asp-page="./ForgotPassword">Forgot your password?</a>
             </p>*@
                         <p class="normalText">
-                            Not a member? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register now</a>
+                            @*Not a member? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register now</a>*@
+                            Not a member? <a asp-controller="Sistema" asp-action="form">Register now</a>
                         </p>
                     </div>
                 </form>

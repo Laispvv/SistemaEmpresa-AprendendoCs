@@ -9,6 +9,14 @@ namespace SistemaTeste2.Areas.Identity.Data
     // Add profile data for application users by adding properties to the AppIdentityUser class
     public class AppIdentityUser : IdentityUser
     {
+        public AppIdentityUser() : base()
+        {
+        }
+
+        public AppIdentityUser(string userName) : base(userName)
+        {
+        }
+
         //informações que devem ter no usuário
         public string Name { get; set; }
         public string Role { get; set; }
