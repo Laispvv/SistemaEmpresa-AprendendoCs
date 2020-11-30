@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Dashboard do Sistema";
 }
+@using Microsoft.AspNetCore.Identity
+@using SistemaTeste2.Areas.Identity.Data
+@inject SignInManager<AppIdentityUser> SignInManager
+@inject UserManager<AppIdentityUser> UserManager
+
 
 <!DOCTYPE html>
 <html>
@@ -19,20 +24,32 @@
     <!-- header -->
     <div id="anchorHeader">
         <p>User <span class="boldWords">Management</span></p>
-        <button id="addNewUser" >
-            <!-- esta tag asp-controller leva para o controller e asp-action leva para o método deste controller -->
-            <a asp-controller="Sistema" asp-action="Form" style="text-decoration:none;color:rgb(68, 68, 68);">
-                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                Add New User
-            </a>
-        </button>
-        <button id="exportToExcel">
-            <a asp-controller="Sistema" asp-action="CreateFile" style="text-decoration:none;color:rgb(68, 68, 68);">
-                <i class="fa fa-file" aria-hidden="true"></i>
-                Export to Excel
-            </a>
-        </button>
-    </div>
+        <form asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" id="currentUser"
+            style="text-decoration: none;
+            color: white;
+            margin-left: 2vw;
+            font-size:24px;
+            font-weight:300;
+            position:absolute;
+            top:6vh;
+            font-family:'Ubuntu',sans-serif;">Hello @UserManager.GetUserName(User)</a>
+            <button type="submit" class="btn btn-link navbar-btn navbar-link" style="padding:11px;">Logout</button>
+        </form>
+            <button id="addNewUser">
+                <!-- esta tag asp-controller leva para o controller e asp-action leva para o método deste controller -->
+                <a asp-controller="Sistema" asp-action="Form" style="text-decoration:none;color:rgb(68, 68, 68);">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Add New User
+                </a>
+            </button>
+            <button id="exportToExcel">
+                <a asp-controller="Sistema" asp-action="CreateFile" style="text-decoration:none;color:rgb(68, 68, 68);">
+                    <i class="fa fa-file" aria-hidden="true"></i>
+                    Export to Excel
+                </a>
+            </button>
+</div>
 
     <!-- main -->
     <div id="anchorBody">
@@ -69,7 +86,7 @@
                             <i class="fa fa-circle"
                                aria-hidden="true"
                                id="statusIcon"
-                               style="font-size: 12px;color:@pessoa.StatusIconObj()";>
+                               style="font-size: 12px;color:@pessoa.StatusIconObj()" ;>
 
                             </i>
                             @pessoa.Status
@@ -113,11 +130,11 @@
 @section Scripts
     {
     <script type="text/javascript">
-       
+
 
     </script>
 
-    }
-    <script src="~/js/dashboard.js"></script>
+}
+<script src="~/js/dashboard.js"></script>
 
-    <script src="~/js/Dashboard2.js"></script>
+<script src="~/js/Dashboard2.js"></script>

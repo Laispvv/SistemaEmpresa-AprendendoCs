@@ -111,7 +111,7 @@ input[type=email], input[type=password],  input[type=text], .textType{
     font-family: 'PT Sans', sans-serif;
 }
 #socialButtonFacebook{
-    margin: 5px 1px 10px 15px;
+    margin: 5px 1px 40px 15px;
     background-image: url("https://icons.iconarchive.com/icons/danleech/simple/24/facebook-icon.png");
     background-position: 23px 12px;
     background-repeat: no-repeat;
