@@ -64,12 +64,9 @@ namespace SistemaTeste2.Controllers
 
             //acha o user com determinado email
             var user = await userManager.FindByNameAsync(pessoa.Email);
-            //user id contêm o id do usuário logado
-            var userId = userManager.GetUserId(HttpContext.User);
-            var userAtual = userManager.FindByIdAsync(userId).Result;
-
+           
             //entra no if se o usuário não for nulo ou for o usuário logado
-            if(user != null || userAtual.UserName == pessoa.Email)
+            if(user != null)
             {
                 //verifica se ouve a atualização em um dos campos
                 if (person.Email != "")
