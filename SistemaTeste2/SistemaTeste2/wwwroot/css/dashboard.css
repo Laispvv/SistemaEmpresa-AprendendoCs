@@ -43,7 +43,7 @@ body{
     background-color: white;
     border: 0;
     border-radius: 3px;
-    padding: 0.6em;
+    padding: 0.7em;
     margin-right: 1em;
     font-size: 1em;
     font-family: 'PT Sans', sans-serif;
@@ -57,7 +57,8 @@ body{
     font-size: 1.4em;
 }
 
-#anchorBody{
+
+#anchorBody {
     font-weight: 300;
     font-size: 1.2em;
     color: rgb(68, 68, 68);
@@ -145,5 +146,10 @@ body{
     float: left;
 }
 
+#currentUser {
+    color: white;
+    text-align: center;
+    font-family: 'PT Sans', sans-serif;
+}
 
 

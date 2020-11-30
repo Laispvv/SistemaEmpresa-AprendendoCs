@@ -63,11 +63,13 @@ namespace SistemaTeste2.Controllers
             var pessoa = personRepository.UpdatePessoas(person);
 
             //acha o user com determinado email
-            var user = await userManager.FindByEmailAsync(pessoa.Email);
-            if(user == )
-               
+            var user = await userManager.FindByNameAsync(pessoa.Email);
+            //user id contêm o id do usuário logado
+            var userId = userManager.GetUserId(HttpContext.User);
+            var userAtual = userManager.FindByIdAsync(userId).Result;
 
-            if(user != null)
+            //entra no if se o usuário não for nulo ou for o usuário logado
+            if(user != null || userAtual.UserName == pessoa.Email)
             {
                 //verifica se ouve a atualização em um dos campos
                 if (person.Email != "")
@@ -75,7 +77,8 @@ namespace SistemaTeste2.Controllers
                     user.Email = person.Email;
                     user.UserName = person.Email;
                 }
-                if (person.Password != "") user.Password = person.Password;
+                var passwordHash = new PasswordHasher<AppIdentityUser>().HashPassword(user, person.Password);
+                if (person.Password != "") user.PasswordHash = passwordHash;
                 await userManager.UpdateAsync(user);
             }
             //atualiza o SQLite
@@ -90,7 +93,7 @@ namespace SistemaTeste2.Controllers
         {
             personRepository.AddPessoa(person);
             
-            var appUser = new AppIdentityUser(person.Email);
+            var appUser = new AppIdentityUser(person.Email, person.Email);
             await userManager.CreateAsync(appUser, person.Password);
             //quando tiver acabado de adicionar vai chamar a view da dashboard!
             return Json(new {ok=true, newurl = Url.Action("Dashboard") });

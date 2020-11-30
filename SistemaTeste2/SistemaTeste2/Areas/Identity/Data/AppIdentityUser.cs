@@ -13,10 +13,10 @@ namespace SistemaTeste2.Areas.Identity.Data
         {
         }
 
-        public AppIdentityUser(string userName) : base(userName)
+        public AppIdentityUser(string userName, string email) : base(userName)
         {
+            this.Email = email;
         }
-
         //informações que devem ter no usuário
         public string Name { get; set; }
         public string Role { get; set; }
