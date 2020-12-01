@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTeste2.Areas.Identity;
 using SistemaTeste2.Areas.Identity.Data;
 using SistemaTeste2.Models;
 using SistemaTeste2.Repositories;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -33,6 +35,15 @@ namespace SistemaTeste2.Controllers
         {
             return View();
         }
+        //private void ExpireAllCookies()
+        //{
+        //    if (Request.Cookies["UserSettings"] != null)
+        //    {
+        //        HttpCookie myCookie = new HttpCookie("UserSettings");
+        //        myCookie.Expires = DateTime.Now.AddDays(-1d);
+        //        Response.Cookies.Add(myCookie);
+        //    }
+        //}
 
         [HttpGet]
         [Authorize]
