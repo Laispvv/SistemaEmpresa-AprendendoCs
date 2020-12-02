@@ -8,12 +8,15 @@ body{
     /* font-size: 20px; */
     min-width: 1400px;
 }
+
 .normalText, span {
     font-family: 'PT Sans', sans-serif;
     font-size: 20px;
     margin-bottom: 10px;
+    text-align:center;
     /* margin-top: 0px; */
 }
+
 #form{
     background-color: rgba(255, 255, 255, 0.850);
     position: relative;
@@ -27,6 +30,7 @@ body{
     border-radius: 4px;
     padding: 2px;
 }
+
 #title{
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
@@ -58,6 +62,7 @@ body{
     padding: 12px 35px 12px 40px;
     background-repeat: no-repeat;
 }
+
 #emailInput{
     /* imagem de textField */
     background-image: url("https://raw.githubusercontent.com/stephenhutchings/typicons.font/master/src/png-24px/mail.png");
@@ -110,6 +115,7 @@ input[type=email], input[type=password],  input[type=text], .textType{
     cursor: pointer;
     font-family: 'PT Sans', sans-serif;
 }
+
 #socialButtonFacebook{
     margin: 5px 1px 40px 15px;
     background-image: url("https://icons.iconarchive.com/icons/danleech/simple/24/facebook-icon.png");
@@ -121,6 +127,7 @@ input[type=email], input[type=password],  input[type=text], .textType{
     float: left;
     
 }
+
 #socialButtonGoogle{
     margin: 5px 15px 10px 1px;
     background-image: url("https://icons.iconarchive.com/icons/papirus-team/papirus-apps/32/google-icon.png");
@@ -132,9 +139,9 @@ input[type=email], input[type=password],  input[type=text], .textType{
     float: right;
 }
 
-#nonMemberText{
-    /* margin-bottom: 300%; */
-    margin-top: 10em;
+#nonMemberText {
+    margin-top: 6em;
+    text-align: center;
 }
 
 #checkboxDiv{
@@ -143,6 +150,7 @@ input[type=email], input[type=password],  input[type=text], .textType{
     /* padding: 10px 0px 10px 25px; */
     margin-left: 7%;
 }
+
 #acessDenied{
     color: red;
     position: absolute;
@@ -150,11 +158,11 @@ input[type=email], input[type=password],  input[type=text], .textType{
     left:40px;
     font-size: 16px;
 }
+
 #buttonEye{
     position: absolute;
-    margin-top: 20px; 
-    margin-bottom: 20px;
-    right: 10%;
+    margin-top: 15px; 
+    right: 8%;
 }
 
 a, a:active{
