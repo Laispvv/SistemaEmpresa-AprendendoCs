@@ -41,7 +41,16 @@ namespace SistemaTeste2
             //addTransiente -> adiciona instancia que só existe enquanto a instância está sendo utilizada por algum obj
             services.AddTransient<IDataService, DataService>();
             services.AddTransient<IPersonRepository, PersonRepository>();
-
+            //services.AddAuthentication().AddMicrosoftAccount(options =>
+            //{
+            //    options.ClientId = Configuration["ExternalLogin:Microsoft:ClientId"];
+            //    options.ClientSecret = Configuration["ExternalLogin:Microsoft:ClientSecret"];
+            //});
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = Configuration["ExternalLogin:Google:ClientId"];
+                options.ClientSecret = Configuration["ExternalLogin:Google:ClientSecret"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
