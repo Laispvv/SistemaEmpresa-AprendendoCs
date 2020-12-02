@@ -25,25 +25,17 @@ namespace SistemaTeste2.Controllers
             this.personRepository = personRepository;
             this.userManager = userManager;
         }
-
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
         
+        [AllowAnonymous]
         public IActionResult Form()
         {
             return View();
         }
-        //private void ExpireAllCookies()
-        //{
-        //    if (Request.Cookies["UserSettings"] != null)
-        //    {
-        //        HttpCookie myCookie = new HttpCookie("UserSettings");
-        //        myCookie.Expires = DateTime.Now.AddDays(-1d);
-        //        Response.Cookies.Add(myCookie);
-        //    }
-        //}
 
         [HttpGet]
         [Authorize]
@@ -120,17 +112,6 @@ namespace SistemaTeste2.Controllers
             {
                 await userManager.DeleteAsync(user);
             }
-        }
-
-        [HttpPost]
-        public IActionResult VerificarAutenticacao([FromBody]Login login)
-        {
-            var pessoas = personRepository.GetPeople();
-            var isLogged = pessoas.Where(p => p.Name == login.User && p.Password == login.Password).SingleOrDefault();
-
-            if (isLogged != null) return Json(new { ok = true, newurl = Url.Action("Dashboard") });
-
-            return Json(new { ok = false, newurl = Url.Action("Login") });
         }
     }
 }

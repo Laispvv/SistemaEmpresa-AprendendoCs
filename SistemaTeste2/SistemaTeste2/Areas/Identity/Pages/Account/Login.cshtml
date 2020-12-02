@@ -23,7 +23,7 @@
         <div class="row" id="textField">
             <div class="col-md-4">
                 <section>
-                    <form method="post">
+                    <form name="loginform" method="post">
                         @*<h4>Use a local account to log in.</h4>
                             <hr />*@
                         <div asp-validation-summary="All" class="text-danger"></div>
@@ -35,7 +35,7 @@
                         <div class="form-group" id="textField">
                             @*<label asp-for="Input.Password"></label>*@
                             <input asp-for="Input.Password" class="form-control textType" id="passwordInput" placeholder="Password"style="width:90%;margin-top:0px;"/>
-                            <input id="buttonEye" type="image" src="https://icons.iconarchive.com/icons/glyphish/glyphish/24/12-eye-icon.png">
+                            <input id="buttonEye" onclick="clickeye(event)" type="image" src="https://icons.iconarchive.com/icons/glyphish/glyphish/24/12-eye-icon.png">
                             @*<span asp-validation-for="Input.Password" class="text-danger"></span>*@
                         </div>
                         <div class="form-group">
@@ -48,7 +48,7 @@
 
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-default" id="loginButton">Log in</button>
+                            <button value="submit" type="submit" class="btn btn-default" id="loginButton">Log in</button>
                         </div>
                         <div>
                             <p class="normalText">
@@ -61,14 +61,14 @@
                                 <input class="socialButton" id="socialButtonFacebook" type="button" value="Facebook">
                             </div>
                             <div>
-                                <input onclick="clickeye" class="socialButton" id="socialButtonGoogle" type="button" value="Google">
+                                <input class="socialButton" id="socialButtonGoogle" type="button" value="Google">
                             </div>
                         </div>
                         <div class="form-group">
                             @*<p>
                                     <a asp-page="./ForgotPassword">Forgot your password?</a>
                                 </p>*@
-                            <p class="normalText">
+                            <p class="normalText" id="nonMemberText">
                                 @*Not a member? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register now</a>*@
                                 Not a member? <a asp-controller="Sistema" asp-action="form">Register now</a>
                             </p>
@@ -112,15 +112,22 @@
 
 <script>
     //faz o botão do olho funcionar
-    var clickeye =  function () {
-        var passwordInput = document.getElementById("passwordInput");
-        if (passwordInput.type == "password") {
-            passwordInput.type = "text";
+    var clickeye = function (event) {
+        event.preventDefault(); //impede que o form seja submited quando clica no olho
+
+        try {
+            var passwordInput = document.getElementById("passwordInput");
+            if (passwordInput.type == "password") {
+                passwordInput.type = "text";
+            }
+            else {
+                passwordInput.type = "password";
+            }
+        } catch (event) {
+            throw new Error(event.message);
         }
-        else {
-            passwordInput.type = "password";
-        }
-    });
+        return false;
+    };
 </script>
 
 @section Scripts {

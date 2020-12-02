@@ -12,6 +12,7 @@ A versão mais estável atualmente é a .NET Core 5.0 SDK, é tudo que precisa i
   - Selecionar o `ASP.NET Core Web Application.`
   - Usar o .Net Core e a versão escolhida.
   - Este projeto utiliza o `Web Application (Model-View-Controller)` com uma autenticação (Utiliza o Identity).
+  
 ## Parte 3 - Identity
 
 ### O que é
@@ -26,6 +27,12 @@ O identity é um framework que facilita a autenticação e login de usuários no
 
 - caso já esteja criado, deve clicar no projeto com o botão direito -> add -> new Scaffold Item
   - ao adicionar um Scaffold, devemos colocar ele na view `_Layout.cshtml`.
+
+### Login externo
+
+Permite fazer login na apliicação com um provedor externo, tipo google ou facebook.
+- Ir no site da Microsoft adicionar um aplicativo.
+- Gerar uma senha para o aplicativo e configurar o tipo de plataforma dele e Url de redirecionamento.
 
 ### SQlite
 
