@@ -35,7 +35,7 @@ Criamos uma classe que herda **DbContext** e tem o **nome da aplicaçãoContext*
   - Na classe cria propriedades que retornam `DbSet<Objeto>` com o nome que queremos para a tabela.
   - A classe que herda **DbContext** deve implementar também o override de `OnConfiguring`
 
-Após configurada, podemos salvar, deletar, atualizar objetos usando o Entity com os seguintes comandos:
+Após configurada, podemos salvar, deletar, atualizar objetos usando o Entity com os seguintes comandos &rarr; **Esse método não funciona em projetos MVC**:
   ```cs
     using (contexto = new LojaContext()){ //LojaContext é o banco de dados
       contexto.Produtos.Add(produto)  //Produtos é o nome da tabela
@@ -46,25 +46,91 @@ Após configurada, podemos salvar, deletar, atualizar objetos usando o Entity co
       contexto.SaveChanges(); //precisamos salvar as mudanças após cada mudança para ela persistir no banco
     }
   ```
-  
-## Parte 3 - Identity
+
+##### Migrations
+
+Instalar o pacote **`Microsoft.EntityFrameworkCore.Tools`** para ter acesso às migrações &rarr; atualizam o banco de dados automaticamente com base no modelo de classes do projeto.
+
+**Precisamos adicionar uma migração inicial para começar a utilizar o banco de dados!**
+
+Passo a passo:
+  - adicionar uma migração &rarr; `Add-Migration nome_migracao`
+  - atualizar o banco &rarr; `Update-Database`
+
+Quando damos update, cria uma pasta migrations com classes que definem a criação da tabela (função up) ou o retorno para a migração antiga (função down).
+
+##### Relacionamentos
+
+Quando queremos fazer um **relacionamento de muitos para muitos**, temos que fazer uma lista de objetos nas duas classes que queremos relacionar entre elas:
+```cs
+  public class Book
+  {
+    public int BookId { get; set; }
+    public string Title { get; set; }
+    public List<Category> Categories { get; set; }
+  }
+
+  public class Category
+  {
+      public int CategoryId { get; set; }
+      public string CategoryName { get; set; }
+      public List<Book> Books { get; set; }
+  }
+```
+
+E então devemos adicionar na classe context no método `OnModelCreating` 
+
+```cs
+ modelBuilder.Entity<BookCategory>()
+            .HasKey(bc => new { bc.BookId, bc.CategoryId });
+  base.OnModelCreating(modelBuilder);
+```
+
+##### Para Projetos MVC
+
+Passo a passo de como criar e utilizar o EntityFrameworkCore neste tipo de projeto:
+
+1. Criar a classe do banco de dados que herda o DbContext, porém com o método override OnModelCreating:
+    ```cs
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Pessoa>().HasKey(t => t.Id);
+        }
+    ```
+2. No arquivo `appsettings.json` adicionar uma `ConnectionStrings` com a connectionString do banco de dados.
+3. Criamos uma classe para cuidar da inicialização do banco de dados &rarr; `DataServices` que deve implementar a interface `IDataServices`
+4. Na classe `Startup`:
+   1. No método `ConfigureServices` adicionar aos serviços o DbContext:
+   ```cs
+    string connectionString = Configuration.GetConnectionString("Default");
+    services.AddDbContext<OutroTesteContext>(options => 
+            options.UseSqlServer(connectionString));
+
+    services.AddTransient<IDataServices, DataService>();
+   ```
+   1. No método `Configure` adicionamos o `IServiceProvider` na chamada do método e chamamos ele para garantir que a Database foi criada:
+    ```cs
+    serviceProvider.GetService<IDataServices>().inicializaDb();
+   ```
+
+## Parte 2 - Identity
 
 ### O que é
 
 O identity é um framework que facilita a autenticação e login de usuários no sistema. Funciona com todas as tecnologias do ASP.NET Core
 
-- tem integração com o banco de dados SQLite.
-
-- o ideal é implementar essa Framework desde o começo -> ao criar o projeto mudamos a autenticação do projeto.
+- Tem integração com o banco de dados SQLite.
+- Para adicionar na criação do projeto: 
 
 ![Onde alterar autenticação](Autentication.png)
 
-- caso já esteja criado, deve clicar no projeto com o botão direito -> add -> new Scaffold Item
+- caso já esteja criado, deve clicar no projeto com o botão direito &rarr; add &rarr; new Scaffold Item
   - ao adicionar um Scaffold, devemos colocar ele na view `_Layout.cshtml`.
 
 ### Login externo
 
-Permite fazer login na apliicação com um provedor externo, tipo google ou facebook.
+Permite fazer login na aplicação com um provedor externo, tipo google ou facebook.
 - Ir no site da Microsoft adicionar um aplicativo.
 - Gerar uma senha para o aplicativo e configurar o tipo de plataforma dele e Url de redirecionamento.
 
