@@ -109,7 +109,7 @@ Passo a passo de como criar e utilizar o EntityFrameworkCore neste tipo de proje
 
     services.AddTransient<IDataServices, DataService>();
    ```
-   1. No método `Configure` adicionamos o `IServiceProvider` na chamada do método e chamamos ele para garantir que a Database foi criada:
+   1. No método `Configure` adicionamos o `IServiceProvider` na chamada do método e chamamos ele para garantir que a Database foi criada e que poderá iniciar o banco com algumas informações, caso necessário:
     ```cs
     serviceProvider.GetService<IDataServices>().inicializaDb();
    ```

@@ -54,12 +54,7 @@ namespace SistemaTeste2.Repositories
         {
             foreach (var p in pessoas)
             {
-                //if (!dbSet.Where(i => i.Id == p.Codigo).Any())
-                //{
-
-                //}
                 contexto.People.Add(new Person(p.Name, p.Role, p.Status, p.Password, p.Email, p.Dia, p.Mes, p.Ano, p.Photo));
-                //contexto.Set<Person>().Add(new Person(p.Name, p.Role, p.Status, p.Password, p.DateCreated, p.Photo));
             }
             contexto.SaveChanges();
         }

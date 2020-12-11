@@ -3,6 +3,7 @@
 }
 @using Microsoft.AspNetCore.Identity
 @using SistemaTeste2.Areas.Identity.Data
+@using System.Web
 @inject SignInManager<AppIdentityUser> SignInManager
 @inject UserManager<AppIdentityUser> UserManager
 
@@ -18,6 +19,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="~/css/dashboard.css">
+
+    <script src="~/js/dashboard.js"></script>
+    @*<script src="~/js/FileSaver.js-2.0.4/dist/FileSaver.js"></script>*@
+    @*<script src="~/js/FileSaver.js-2.0.4/dist/FileSaver.min.js"></script>*@
+    <script src="~/js/FileSaver.js-2.0.4/src/FileSaver.js"></script>
+    <script src="~/js/Dashboard2.js"></script>
+
 </head>
 
 <body>
@@ -43,11 +51,9 @@
                     Add New User
                 </a>
             </button>
-            <button id="exportToExcel">
-                <a asp-controller="Sistema" asp-action="CreateFile" style="text-decoration:none;color:rgb(68, 68, 68);">
+            <button id="exportToExcel" onclick="exportPeople()">
                     <i class="fa fa-file" aria-hidden="true"></i>
                     Export to Excel
-                </a>
             </button>
 </div>
 
@@ -128,13 +134,35 @@
 </body>
 </html>
 
-@section Scripts
-    {
-    <script type="text/javascript">
-            
-    </script>
 
-}
-<script src="~/js/dashboard.js"></script>
+<script>
 
-<script src="~/js/Dashboard2.js"></script>
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
+    function exportPeople() {
+        @{string pessoas = "";}
+
+    @foreach (var pessoa in Model)
+        {
+            pessoas += pessoa.ToString();
+            pessoas += "\n";
+        }
+        //precisa desta função para transformar corretamente char especiais
+        var stringJs = "@Html.Raw(HttpUtility.JavaScriptStringEncode(pessoas))";
+
+        download("pessoasExport.txt", stringJs);
+    }
+
+
+</script>
