@@ -43,20 +43,6 @@ namespace SistemaTeste2.Controllers
         {
             return View(personRepository.GetPeople());
         }
-        public IActionResult CreateFile()
-        {
-            string nomeArquivoCSV = "C:\\Users\\Laís\\Downloads\\pessoasExportadas.csv";
-            var people = personRepository.GetPeople();
-            using (var file = new FileStream(nomeArquivoCSV, FileMode.Create))
-            using (var escritor = new StreamWriter(file, Encoding.UTF8))
-            {
-                foreach (var item in people)
-                {
-                    escritor.WriteLine(item.ToString());
-                }
-            }
-            return RedirectToAction("Dashboard");
-        }
 
         [HttpPost]
         public async Task<IActionResult> UpdatePessoasAsync([FromBody]Person person)
