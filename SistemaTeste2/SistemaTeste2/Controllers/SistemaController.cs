@@ -57,7 +57,7 @@ namespace SistemaTeste2.Controllers
             //entra no if se o usuário não for nulo ou for o usuário logado
             if(user != null)
             {
-                //verifica se ouve a atualização em um dos campos
+                //verifica se houve a atualização em um dos campos
                 if (person.Email != "")
                 {
                     user.Email = person.Email;

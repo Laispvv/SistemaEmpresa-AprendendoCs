@@ -20,11 +20,7 @@
 
     <link rel="stylesheet" href="~/css/dashboard.css">
 
-    <script src="~/js/dashboard.js"></script>
-    @*<script src="~/js/FileSaver.js-2.0.4/dist/FileSaver.js"></script>*@
-    @*<script src="~/js/FileSaver.js-2.0.4/dist/FileSaver.min.js"></script>*@
-    <script src="~/js/FileSaver.js-2.0.4/src/FileSaver.js"></script>
-    <script src="~/js/Dashboard2.js"></script>
+    <script src="~/js/Dashboard.js"></script>
 
 </head>
 
@@ -120,15 +116,14 @@
         </table>
         <!-- parte que mostra as páginas -->
         <div id="pageCounter">
-            <p>Showing <span class="boldWords" id="currentEntrie"></span> out of <span class="boldWords" id="totalAmount"></span> entries</p>
-            <button> Next </button>
-            <button id="5button"> <span>5</span> </button>
-            <button id="4button"> <span>4</span> </button>
-            <button id="3button"> <span>3</span> </button>
-            <button id="2button"> <span>2</span> </button>
-            <button id="1button"> <span>1</span> </button>
-            <button> Previous </button>
-            
+            <p>Showing <span class="boldWords" id="currentEntrie">6</span> out of <span class="boldWords" id="totalAmount">@Model.Count</span> entries</p>
+            <button onclick="onNextClick()"> Next </button>
+            <button class="5" id="5button" > <span id="5span">5</span> </button>
+            <button class="4" id="4button" > <span id="4span">4</span> </button>
+            <button class="3" id="3button" > <span id="3span">3</span> </button>
+            <button class="2" id="2button" > <span id="2span">2</span> </button>
+            <button class="1" id="1button" style="color: white;background-color: #22bee6;"> <span id="1span">1</span> </button>
+            <button onclick="onPreviousClick()"> Previous </button>
         </div>
     </div>
 </body>
@@ -136,24 +131,10 @@
 
 
 <script>
-
-    function download(filename, text) {
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-        element.setAttribute('download', filename);
-
-        element.style.display = 'none';
-        document.body.appendChild(element);
-
-        element.click();
-
-        document.body.removeChild(element);
-    }
-
     function exportPeople() {
-        @{string pessoas = "";}
+        @{ string pessoas = ""; }
 
-    @foreach (var pessoa in Model)
+        @foreach(var pessoa in Model)
         {
             pessoas += pessoa.ToString();
             pessoas += "\n";
@@ -163,6 +144,5 @@
 
         download("pessoasExport.txt", stringJs);
     }
-
 
 </script>
